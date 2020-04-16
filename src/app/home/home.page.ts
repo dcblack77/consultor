@@ -10,7 +10,7 @@ import {log} from 'util';
 })
 export class HomePage {
 
-  codeData: any;
+  codeData: string;
 
   constructor( private barcodeScanner: BarcodeScanner,
                private conService: ConsultorService
@@ -18,33 +18,17 @@ export class HomePage {
 
   scan() {
 
-    const data = this.conService.codeConsultor('8410261172002');
-    console.log(data);
-    // this.conService.consulta().subscribe(data => console.log(data));
-
-    // const data = await get('articulo', '8410261172002');
-    // console.log(data);
-
-    return;
-/*
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
-
-      if ( !barcodeData.cancelled ) {
-        // this.dataLocal.guardarRegistro( barcodeData.format, barcodeData.text );
-      }
       this.codeData = barcodeData.text;
 
-      //const result = this.consultorService.codeConsultor('8410261172002');
+      const result = this.conService.consulta(this.codeData).subscribe();
       console.log(result);
 
     }).catch(err => {
       console.log('Error', err);
 
-      // this.dataLocal.guardarRegistro( 'QRCode', 'https://fernando-herrera.com' );
-      // this.dataLocal.guardarRegistro( 'QRCode', 'geo:40.73151796986687,-74.06087294062502' );
-
-    });*/
+    });
 
   }
 
