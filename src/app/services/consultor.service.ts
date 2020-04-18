@@ -13,10 +13,12 @@ export class ConsultorService {
         console.log('Clase inicializada');
     }
 
-    consulta(code: any) {
-       return this.http.get(`http://localhost:3000/consultor/${code}`)
+    consulta(code: string) {
+        return this.http.post(`http://192.168.1.32:3000/consulta`, { consult: code })
             .pipe(
-            map(res => res)
-        );
+                map(res => {
+                    return res;
+                })
+            );
     }
 }

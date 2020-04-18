@@ -1,30 +1,26 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Consultor
-    </ion-title>
+    <ion-row>
+      <ion-title size="big">
+        Consultor de Precio
+      </ion-title>
+      <img src="/assets/logo-dc.png" width="45%" alt="">
+    </ion-row>
+    <ion-row>
+      <ion-title size="small">Pedro Cabrera</ion-title>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Consultor</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
+<ion-content fullscreen>
+  <div id="container" class="xs">
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Codigo a buscar</ion-label>
-            <ion-input></ion-input>
+            <ion-label>Codigo a buscar</ion-label>
+            <ion-input ngModel="searching"></ion-input>
           </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
           <ion-slide>
             <ion-button expand="full"
                         fill="outline"
@@ -36,13 +32,52 @@
           </ion-slide>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="data">
         <ion-col>
-          <ion-item>
-            {{codeData}}
-          </ion-item>
+            <ion-card *ngFor="let articulo of data.articulo; index as i">
+              <ion-card-header>
+                <ion-card-title>{{articulo.nombre}}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-item>
+                  <ion-label>codigo: </ion-label>
+                  <ion-note slot="end"> {{articulo.codigo}} </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Precio: </ion-label>
+                  <ion-note slot="end"> {{articulo.PrecioVent | number:'.2-2' }} </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label>IVA: </ion-label>
+                  <ion-note slot="end"> {{articulo.IVA | number :'.2-2'}} </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Precio Total: </ion-label>
+                  <ion-note slot="end"> {{articulo.PrecioTOT | number :'.2-2'}} </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label *ngIf="articulo.ValorDol" >Precio $: </ion-label>
+                  <ion-note slot="end"> {{articulo.ValorDol | number :'.2-2'}} </ion-note>
+                </ion-item>
+                <ion-item></ion-item>
+                <ion-item>
+                  <ion-label>Impuesto: </ion-label>
+                  <ion-note slot="end"> {{articulo.Impuesto | number :'.2-2'}} % </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label *ngIf="articulo.FactorCab" >Factor $: </ion-label>
+                  <ion-note slot="end"> {{articulo.FactorCab | number:'.2-2'}} </ion-note>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
+
 </ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-title size="small">Desarrollado por Ing. Diego Cabrera</ion-title>
+  </ion-toolbar>
+</ion-footer>
