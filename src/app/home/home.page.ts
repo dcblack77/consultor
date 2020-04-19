@@ -24,15 +24,7 @@ export class HomePage {
       this.codeData = barcodeData.text;
 
       // tslint:disable-next-line:max-line-length
-      this.conService.consulta(`SELECT codigo,
-                                      nombre,
-                                      round(impuesto1,2)as Impuesto,
-                                      round(factor,2) as FactorCab,
-                                      round(precio1,2) as PrecioVent,
-                                      round((precio1 * (impuesto1 / 100)),2) as IVA,
-                                      round((((impuesto1 / 100)*precio1) + precio1),2) as PrecioTOT,
-                                      if((factor > 1),(round((preciofin1 / factor),2)),0) as ValorDol
-                                      FROM articulo WHERE codigo = ${this.codeData}`)
+      this.conService.consulta(`${this.codeData}`)
           .subscribe((resp) => {
             this.data = resp;
           });

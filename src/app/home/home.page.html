@@ -55,8 +55,8 @@
                   <ion-label>Precio Total: </ion-label>
                   <ion-note slot="end"> {{articulo.PrecioTOT | number :'.2-2'}} </ion-note>
                 </ion-item>
-                <ion-item>
-                  <ion-label *ngIf="articulo.ValorDol" >Precio $: </ion-label>
+                <ion-item *ngIf="articulo.ValorDol">
+                  <ion-label >Precio $: </ion-label>
                   <ion-note slot="end"> {{articulo.ValorDol | number :'.2-2'}} </ion-note>
                 </ion-item>
                 <ion-item></ion-item>
